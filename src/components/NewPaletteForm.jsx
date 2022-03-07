@@ -50,19 +50,17 @@ export default function NewPaletteForm({ maxColors = 20, ...props }) {
   };
   const addRandomColor = () => {
     const allColors = seedColors.map((p) => p.colors).flat();
-    let rand;
-    let randomColor;
-    let isDuplicateColor = true;
+    let rand,
+      isDuplicateColor = true;
     while (isDuplicateColor) {
       rand = Math.floor(Math.random() * allColors.length);
-      randomColor = allColors[rand];
-
+      let randomColor = allColors[rand];
       isDuplicateColor = colors.some(
         (color) => color.name === randomColor.name
       );
     }
 
-    setColors([...colors, randomColor]);
+    setColors([...colors, allColors[rand]]);
   };
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setColors((colors) => arrayMoveImmutable(colors, oldIndex, newIndex));
